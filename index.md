@@ -2,13 +2,13 @@
 
 ![Tatsuya Takahashi](./assets/profile.jpeg)
 
-[Twitter](https://twitter.com/iwashi_ser)
+[Twitter](https://twitter.com/iwashi_ser){:target="_blank"}
 
-[Kaggle](https://www.kaggle.com/tatsuyatakahashi)
+[Kaggle](https://www.kaggle.com/tatsuyatakahashi){:target="_blank"}
 
-[LAPRAS](https://lapras.com/public/VULQ5PG)
+[LAPRAS](https://lapras.com/public/VULQ5PG){:target="_blank"}
 
-[Blog - Fake Plastic Trees](https://fake-plastic-trees.hatenablog.jp/)
+[Blog - Fake Plastic Trees](https://fake-plastic-trees.hatenablog.jp/){:target="_blank"}
 
 ## Updates
 - 2021.01.08 公開
