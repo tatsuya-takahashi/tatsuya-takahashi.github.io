@@ -1,9 +1,10 @@
 ## Tatsuya Takahashi - 高橋 達哉
-<img src="./assets/profile.jpeg" width=100% />
 
-<a href="https://twitter.com/iwashi_ser?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">@iwashi_ser</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+![Tatsuya Takahashi](./assets/profile.jpeg)
 
-[Kaggle - iwashi](https://www.kaggle.com/tatsuyatakahashi)
+[Twitter](https://twitter.com/iwashi_ser)
+
+[Kaggle](https://www.kaggle.com/tatsuyatakahashi)
 
 [LAPRAS](https://lapras.com/public/VULQ5PG)
 
