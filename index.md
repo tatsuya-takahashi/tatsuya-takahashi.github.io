@@ -8,15 +8,20 @@
 
 [LAPRAS](https://lapras.com/public/VULQ5PG){:target="_blank"}
 
-[Blog - Fake Plastic Trees](https://fake-plastic-trees.hatenablog.jp/){:target="_blank"}
 
 ## Updates
 - 2021.01.08 公開
+
 
 ## about me
 - 高橋　達哉（Tatsuya Takahashi）
 - 会社でデータサイエンティストとして働きながら，社会人大学院生として音声信号処理の研究を行っている（博士前期課程）
 - 個人でOSSの開発（論文可視化），人工知能DJプロジェクトへの参画と開発を行っている．
+
+
+## Paper
+- TBD
+
 
 ## carrer
 - 地方国立大学の数学科卒業
@@ -27,6 +32,7 @@
 - エイベックスの人工知能DJプロジェクトに参画
 - 社会人学生として大学院に入学（博士前期課程）
  
+
 ## skill
 - 数理最適化、機械学習
 - 音声信号処理、自然言語処理
@@ -38,10 +44,12 @@
 - クラウドアプリケーションの構築，運用（Azure, AWS）
 - コンテナ運用（Docker, Kubernetes(AKS含む)）
 
+
 ## OSS
 ### Citation Viewer
 - Paperpileの論文可視化プロジェクト
-https://zenn.dev/iwashi_ser/articles/424cc29cbf3e32
+  - [[Paperpile]論文の引用関係をネットワークで可視化するアプリケーションを作成しました](https://zenn.dev/iwashi_ser/articles/424cc29cbf3e32){:target="_blank"}
+
 
 ## interview
 - [論文などから研究者どうしの関係性を可視化する「AI マッピング システム」を開発、異分野融合の促進で革新的がん医療の実用化を支援](https://customers.microsoft.com/en-us/story/748715-national-cancer-center-healthcare-azure-jp-japan){:target="_blank"}
@@ -62,13 +70,27 @@ https://zenn.dev/iwashi_ser/articles/424cc29cbf3e32
  
 ## publishment
 - [Python Live Coding](https://booth.pm/ja/items/1313912){:target="_blank"}
-  
+
+
 ## YouTube Channel
 - [DJ IWASHI](https://www.youtube.com/channel/UCkNvky7O7fhjaoLyZWi3z1A?view_as=subscriber){:target="_blank"}
 
+
 ## Project
-### HUMANOID DJ 
 - [HUMANOID DJ](https://avex.jp/humanoiddj/){:target="_blank"}
+
+
+## Link
+- [Blog - Fake Plastic Trees](https://fake-plastic-trees.hatenablog.jp/){:target="_blank"}
+
+- [Qiita - iwashi_kun](https://qiita.com/iwashi-kun){:target="_blank"}
+
+- [Zenn - iwashi](https://zenn.dev/iwashi_ser){:target="_blank"}
+
+- [LinkedIn](https://www.linkedin.com/in/tatsuya-takahashi-84b94215a/){:target="_blank"}
+
+- [Wantedly](https://www.wantedly.com/id/tatsuya___takahashi){:target="_blank"}
+
 
 ## Contact
 - ta.takahashi111@gmail.com
