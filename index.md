@@ -57,7 +57,7 @@
 - [フルリモートで“働きながら大学院進学”を実現！自ら新たなキャリアを開拓したエンジニアの行動力](https://note.com/ppt_hr/n/n8e2a73e21b46){:target="_blank"}
 - [部署横断のLT会を開催！組織の枠を超えて技術やノウハウを共有するメリットとは？](https://note.com/ppt_hr/n/n79d0cdba5334){:target="_blank"}
 
- 
+
 ### Speaking
 - [グラフ分析ナイト（エンジニア向け） - Azure での大規模非構造データの解析によるグラフ化](https://speakerdeck.com/iwashi/gurahufen-xi-naito-enziniaxiang-ke-azure-defalseda-gui-mo-fei-gou-zao-detafalsejie-xi-niyorugurahuhua){:target="_blank"}
 - [【LTセッション】AKSを用いた推論環境の構築_DLLAB推論ナイト from Deep Learning Lab（ディープラーニング・ラボ）](https://www.slideshare.net/DeepLearningLab/aks-112745571){:target="_blank"}
@@ -67,7 +67,7 @@
 - [Spotify Web APIから収集した楽曲のメル周波数スペクトログラムを用いたジャンル推定と特定次元空間へのマッピング](https://fake-plastic-trees.hatenablog.jp/entry/2019/12/01/183713){:target="_blank"}
 - [1兆レコードの分析処理基盤@Azure](https://qiita.com/iwashi-kun/items/77fea33b904f8b9a32b9){:target="_blank"}
 
- 
+
 ### Publishment
 - [Python Live Coding](https://booth.pm/ja/items/1313912){:target="_blank"}
 
