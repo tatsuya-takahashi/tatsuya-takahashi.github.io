@@ -4,3 +4,4 @@ title: iwashi_ser
 description: Tatsuya Takahashi
 google_analytics:
 logo: ./assets/profile_i.jpg
+markdown: kramdown
