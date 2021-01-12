@@ -79,6 +79,9 @@
 ### Project
 - [HUMANOID DJ](https://avex.jp/humanoiddj/){:target="_blank"}
 
+### Donation
+- [Amazon Wish List](https://www.amazon.co.jp/hz/wishlist/ls/LM7BTYTNIHI?type=wishlist&filter=all&sort=priority&viewType=list)
+
 
 ### Link
 - [Blog - Fake Plastic Trees](https://fake-plastic-trees.hatenablog.jp/){:target="_blank"}
