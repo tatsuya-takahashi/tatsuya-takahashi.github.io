@@ -2,6 +2,6 @@ theme: jekyll-theme-minimal
 lang: ja-JP
 title: iwashi_ser
 description: Tatsuya Takahashi
-google_analytics: G-9DCR20GCYR
+google_analytics: UA-186721348-1
 logo: ./assets/profile_i.jpg
 markdown: kramdown
