@@ -63,7 +63,7 @@
 ### Speaking
 - [グラフ分析ナイト（エンジニア向け） - Azure での大規模非構造データの解析によるグラフ化](https://speakerdeck.com/iwashi/gurahufen-xi-naito-enziniaxiang-ke-azure-defalseda-gui-mo-fei-gou-zao-detafalsejie-xi-niyorugurahuhua){:target="_blank"}
 - [【LTセッション】AKSを用いた推論環境の構築_DLLAB推論ナイト from Deep Learning Lab（ディープラーニング・ラボ）](https://www.slideshare.net/DeepLearningLab/aks-112745571){:target="_blank"}
-- [DJプレイの自動化に係る研究の紹介と今後の展望](https://speakerdeck.com/iwashi/djpureifalsezi-dong-hua-nixi-ruyan-jiu-falseshao-jie-tojin-hou-falsezhan-wang)
+- [Music×Analytics Meetup Vol.4 - DJプレイの自動化に係る研究の紹介と今後の展望](https://speakerdeck.com/iwashi/djpureifalsezi-dong-hua-nixi-ruyan-jiu-falseshao-jie-tojin-hou-falsezhan-wang){:target="_blank"}
 
 ### Hot entry
 - [Spotify Web APIから収集した楽曲のメル周波数スペクトログラムを用いたジャンル推定と特定次元空間へのマッピング](https://fake-plastic-trees.hatenablog.jp/entry/2019/12/01/183713){:target="_blank"}
