@@ -22,9 +22,11 @@
 - 人工知能DJプロジェクト参画中
 
 
-### Research papers
+### Research
 - TBD
 
+### Minor Research
+- TBD
 
 ### Carrer
 - 地方国立大学の数学科卒業
