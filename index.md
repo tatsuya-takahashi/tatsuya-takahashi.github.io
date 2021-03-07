@@ -39,6 +39,7 @@
  
 
 ### Skill
+- Apache Spark
 - 数理最適化、機械学習
 - 音声信号処理、自然言語処理
 - 解析言語：Python, MATLAB
