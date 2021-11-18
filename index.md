@@ -41,7 +41,7 @@
 - 社会人学生として大学院の博士課程に入学
  
 ### License
-- [E資格（JDLA Deep Learning for ENGINEER 2018）](https://nlp.netlearning.co.jp/api/v1.0/openBadge/v2/Wallet/Public/GetAssertionShare/VXNxYU12YlZoMUI1c3BxSC9FbEdEUT09)
+- [E資格（JDLA Deep Learning for ENGINEER 2018）](https://nlp.netlearning.co.jp/api/v1.0/openBadge/v2/Wallet/Public/GetAssertionShare/VXNxYU12YlZoMUI1c3BxSC9FbEdEUT09){:target="_blank"}
 - IPA基本情報，応用情報，データベーススペシャリスト，ネットワークスペシャリスト
 - 統計検定準一級
 
