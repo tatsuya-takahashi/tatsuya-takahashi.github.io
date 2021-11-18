@@ -12,7 +12,9 @@
 ### Updates
 - 2021.01.08 公開
 - 2021.02.27 muana vol.4での発表資料を追加しました．
-- 2021.03.23 ポスター発表した論文を，Researchに追加しました．
+- 2021.03.23 ポスター発表した論文を，Minor Researchに追加しました．
+- 2021.11.18 聴覚研にてポスター発表した論文を，Researchに追加しました．
+- 2021.11.18 保持資格をLicenseに，語学をLanguageに追記しました．
 
 
 ### About me
@@ -38,6 +40,14 @@
 - エイベックスの人工知能DJプロジェクトに参画
 - 社会人学生として大学院の博士課程に入学
  
+### License
+- [E資格（JDLA Deep Learning for ENGINEER 2018）](https://nlp.netlearning.co.jp/api/v1.0/openBadge/v2/Wallet/Public/GetAssertionShare/VXNxYU12YlZoMUI1c3BxSC9FbEdEUT09)
+- IPA基本情報，応用情報，データベーススペシャリスト，ネットワークスペシャリスト
+- 統計検定準一級
+
+### Language
+- 日本語（母語）
+- 英語（TOEIC 870点）
 
 ### Skill
 - Apache Spark
