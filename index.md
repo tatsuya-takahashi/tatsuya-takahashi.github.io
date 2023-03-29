@@ -1,4 +1,4 @@
-## Tatsuya Takahashi - 高橋 達哉（転職活動中）
+## Tatsuya Takahashi - 高橋 達哉
 
 <!-- ![Tatsuya Takahashi](./assets/profile.jpeg) -->
 
@@ -15,12 +15,12 @@
 - 2021.03.23 ポスター発表した論文を，Minor Researchに追加しました．
 - 2021.11.18 聴覚研にてポスター発表した論文を，Researchに追加しました．
 - 2021.11.18 保持資格をLicenseに，語学をLanguageに追記しました．
-
+- 2023.03.29 学歴とインタビューを更新しました.
 
 ### About me
 - 高橋　達哉（Tatsuya Takahashi）
+- 修士（情報科学）
 - データサイエンティスト
-- 社会人大学院生（音声信号処理）
 - 個人で論文可視化OSSの開発
 - 人工知能DJプロジェクト参画中
 
@@ -38,8 +38,9 @@
 - 事業会社のデータ分析部門に転職
 - 国立がん研究センターとの共同研究に従事，分析基盤構築や論文解析を行う
 - エイベックスの人工知能DJプロジェクトに参画
-- 社会人学生として大学院の博士課程に入学
- 
+- 社会人学生として大学院に入学、修士（情報科学）を取得
+
+
 ### License
 - [E資格（JDLA Deep Learning for ENGINEER 2018）](https://nlp.netlearning.co.jp/api/v1.0/openBadge/v2/Wallet/Public/GetAssertionShare/VXNxYU12YlZoMUI1c3BxSC9FbEdEUT09){:target="_blank"}
 - IPA基本情報，応用情報，データベーススペシャリスト，ネットワークスペシャリスト
@@ -61,6 +62,21 @@
 - クラウドアプリケーションの構築，運用（Azure, AWS）
 - コンテナ運用（Docker, Kubernetes(AKS含む)）
 
+### Works
+
+- 自身がPMを勤めたプロジェクト
+  - 日経XTECH（クロステック）
+    - [パーソルP＆T、旭化成向けに会議DXソリューション開発を支援](https://xtech.nikkei.com/atcl/nxt/news/18/14860/)
+  - ■IoTニュース
+    - [パーソルP&T、旭化成の会議DXを目的にAIなどを活用したシステムを開](https://iotnews.jp/digital-transformation/220748/)
+  - ■ZDNet Japan
+    - [パーソルP＆T、旭化成の「会議DX」を検証--参加者ごとの発話量をグラフで可](https://japan.zdnet.com/article/35201454/)
+  - ■Yahoo!ニュース
+    - [パーソルP＆T、旭化成の「会議DX」を検証--参加者ごとの発話量をグラフで可](https://news.yahoo.co.jp/articles/f7a48e1114428afde3365bc175f936489c12bf6b)
+  - ■NewsPICKS 
+    - [パーソルP＆T、旭化成の「会議DX」を検証--参加者ごとの発話量をグラフで可](https://newspicks.com/news/8242937?ref=company_SPD3K8VHUTHS6Y72&ref_t=news)
+  - ■Antenna
+    - [パーソルP＆T、旭化成の「会議DX」を検証--参加者ごとの発話量をグラフで可視化](https://antenna.jp/articles/18240342)
 
 ### OSS
 #### Citation Viewer
