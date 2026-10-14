@@ -250,7 +250,7 @@
           '" data-category="' +
           escapeHTML(group.id) +
           '"><button class="skill-network__group-node" type="button" aria-label="' +
-          escapeHTML(group.name + ". " + localized(data.ui.skillsDragHint)) +
+          escapeHTML(group.name) +
           '">' +
           escapeHTML(group.name) +
           "</button></li>";
@@ -271,7 +271,7 @@
               '" data-category="' +
               escapeHTML(skill.category) +
               '"><button class="skill-network__skill-node" type="button" aria-label="' +
-              escapeHTML(localized(skill.name) + ". " + localized(data.ui.skillsDragHint)) +
+              escapeHTML(localized(skill.name)) +
               '">' +
               iconMarkup +
               '<span class="skill-network__name">' +
@@ -286,11 +286,9 @@
 
     return (
       '<section class="content-section skills-section" id="skills" aria-labelledby="skills-title">' +
-      '<div class="section-heading skills-heading"><h2 id="skills-title">' +
+      '<div class="section-heading"><h2 id="skills-title">' +
       escapeHTML(localized(data.ui.skills)) +
-      '</h2><p class="skill-network-hint">' +
-      escapeHTML(localized(data.ui.skillsDragHint)) +
-      '</p></div><div class="skill-network-stage"><svg class="skill-network__edges" aria-hidden="true"></svg><ul class="skill-network" aria-label="' +
+      '</h2></div><div class="skill-network-stage"><svg class="skill-network__edges" aria-hidden="true"></svg><ul class="skill-network" aria-label="' +
       escapeHTML(localized(data.ui.skills)) +
       '">' +
       items +
