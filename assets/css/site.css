@@ -382,6 +382,11 @@ button {
   aspect-ratio: 16 / 9;
 }
 
+.work-image.work-image--poster {
+  aspect-ratio: 3 / 2;
+  object-position: center 40%;
+}
+
 .work-copy {
   min-width: 0;
 }

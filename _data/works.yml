@@ -56,9 +56,10 @@
     en: Live coding performances and workshops that share the joy of programming and creative engineering.
     ja: プログラミングとクリエイティブエンジニアリングの楽しさを共有する、ライブコーディング公演とワークショップ。
   image: /assets/works/python-live-coding.png
+  imageVariant: poster
   imageAlt:
-    en: A live coding performance on a large screen
-    ja: 大きな画面を使ったライブコーディングの様子
+    en: Python Live Coding event poster with the title in large type
+    ja: Python Live Codingのタイトルを大きく配置したイベントポスター
   url: "https://booth.pm/ja/items/1313912"
 - id: dj-iwashi
   title:

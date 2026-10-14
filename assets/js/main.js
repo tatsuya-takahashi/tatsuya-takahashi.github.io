@@ -149,6 +149,7 @@
         const imageVariantClasses = {
           "app-icon": " work-image--app-icon",
           landscape: " work-image--landscape",
+          poster: " work-image--poster",
         };
         const imageVariant = imageVariantClasses[work.imageVariant] || "";
         const titleMarkup = url
