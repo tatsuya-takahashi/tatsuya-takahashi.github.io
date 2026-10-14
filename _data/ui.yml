@@ -27,8 +27,8 @@ skills:
   en: Skills
   ja: スキル
 skillsDragHint:
-  en: Drag skills to explore
-  ja: スキルをドラッグして動かせます
+  en: Drag nodes; children spring back to their original distance
+  ja: ノードをドラッグできます。子ノードは中心から元の距離に戻ります
 rolePrefix:
   en: "Role:"
   ja: "役割："

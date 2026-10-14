@@ -631,13 +631,14 @@ a.work-arrow:hover {
 
 .skill-network__item--group {
   z-index: 2;
-  pointer-events: none;
 }
 
 .skill-network__group-node {
   display: grid;
   width: 132px;
   min-height: 62px;
+  margin: 0;
+  padding: 0 1rem;
   place-items: center;
   border: 2px solid var(--skill-accent, var(--blue));
   border-radius: 999px;
@@ -646,7 +647,23 @@ a.work-arrow:hover {
   box-shadow: 0 7px 24px rgba(31, 45, 64, 0.1);
   font-family: var(--serif);
   font-size: 1.15rem;
+  font-weight: 600;
   line-height: 1;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.skill-network__group-node:hover {
+  background: #fff;
+  box-shadow: 0 9px 28px rgba(31, 45, 64, 0.14);
+}
+
+.skill-network__item.is-dragging .skill-network__group-node {
+  cursor: grabbing;
+  background: #fff;
+  box-shadow: 0 12px 32px rgba(31, 45, 64, 0.2);
 }
 
 .skill-network__skill-node {

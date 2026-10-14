@@ -251,9 +251,11 @@
           escapeHTML(group.id) +
           '" data-category="' +
           escapeHTML(group.id) +
-          '"><span class="skill-network__group-node">' +
+          '"><button class="skill-network__group-node" type="button" aria-label="' +
+          escapeHTML(group.name + ". " + localized(data.ui.skillsDragHint)) +
+          '">' +
           escapeHTML(group.name) +
-          "</span></li>";
+          "</button></li>";
         const skillNodes = data.skills
           .filter(function (skill) { return skill.category === group.id; })
           .map(function (skill) {
@@ -431,6 +433,7 @@
           type: "group",
           category: group.id,
           element: element,
+          control: element.querySelector(".skill-network__group-node"),
           width: bounds.width,
           height: bounds.height,
           x: x,
@@ -460,12 +463,14 @@
         childIndexes[skill.category] = childIndex + 1;
         const count = childCounts[skill.category] || 1;
         const angle = (childIndex / count) * Math.PI * 2 - Math.PI / 2;
-        const radiusX = Math.min(width * (compact ? 0.24 : 0.13), compact ? 88 : 148);
+        const radiusX = Math.min(width * (compact ? 0.34 : 0.13), compact ? 152 : 148);
         const radiusY = compact ? 94 : 126;
-        const offsetX = Math.cos(angle) * radiusX;
-        const offsetY = Math.sin(angle) * radiusY;
-        const x = clamp(group.x + offsetX, bounds.width / 2 + 5, width - bounds.width / 2 - 5);
-        const y = clamp(group.y + offsetY, bounds.height / 2 + 5, height - bounds.height / 2 - 5);
+        const initialOffsetX = Math.cos(angle) * radiusX;
+        const initialOffsetY = Math.sin(angle) * radiusY;
+        const x = clamp(group.x + initialOffsetX, bounds.width / 2 + 5, width - bounds.width / 2 - 5);
+        const y = clamp(group.y + initialOffsetY, bounds.height / 2 + 5, height - bounds.height / 2 - 5);
+        const offsetX = x - group.x;
+        const offsetY = y - group.y;
         return {
           id: skill.id,
           type: "skill",
@@ -480,6 +485,7 @@
           targetY: y,
           offsetX: offsetX,
           offsetY: offsetY,
+          restLength: Math.hypot(offsetX, offsetY),
         };
       });
       const nodes = groupNodes.concat(skillNodes);
@@ -491,23 +497,45 @@
         return {
           source: node.id,
           target: "group-" + node.category,
+          distance: node.restLength,
           line: line,
         };
       });
 
+      function forceParentSprings(alpha) {
+        skillNodes.forEach(function (node) {
+          const parent = groupById.get(node.category);
+          const dx = node.x - parent.x;
+          const dy = node.y - parent.y;
+          const distance = Math.hypot(dx, dy);
+          if (!distance) return;
+          const stretch = distance - node.restLength;
+          const force = (stretch / distance) * alpha * 2.2;
+          node.vx -= dx * force;
+          node.vy -= dy * force;
+        });
+      }
+      forceParentSprings.initialize = function () {};
+      const forceX = window.d3.forceX(function (node) { return node.targetX; }).strength(0.34);
+      const forceY = window.d3.forceY(function (node) { return node.targetY; }).strength(0.34);
+
       skillNetworkSimulation = window.d3
         .forceSimulation(nodes)
         .velocityDecay(0.62)
-          .alphaDecay(0.035)
+        .alphaDecay(0.035)
         .force(
           "link",
-          window.d3.forceLink(links).id(function (node) { return node.id; }).distance(compact ? 110 : 132).strength(0.2),
+          window.d3.forceLink(links)
+            .id(function (node) { return node.id; })
+            .distance(function (link) { return link.distance; })
+            .strength(0.82),
         )
         .force("charge", window.d3.forceManyBody().strength(function (node) {
           return node.type === "group" ? -38 : -18;
         }))
-        .force("x", window.d3.forceX(function (node) { return node.targetX; }).strength(0.045))
-        .force("y", window.d3.forceY(function (node) { return node.targetY; }).strength(0.055))
+        .force("x", forceX)
+        .force("y", forceY)
+        .force("parent-spring", forceParentSprings)
         .force("rect-collide", forceRectCollide(12));
 
       function update() {
@@ -547,6 +575,16 @@
         });
       }
 
+      function moveChildrenWithGroup(groupNode) {
+        skillNodes.forEach(function (child) {
+          if (child.category !== groupNode.category) return;
+          child.targetX = groupNode.x + child.offsetX;
+          child.targetY = groupNode.y + child.offsetY;
+        });
+        forceX.x(function (node) { return node.targetX; });
+        forceY.y(function (node) { return node.targetY; });
+      }
+
       const drag = window.d3
         .drag()
         .container(function () { return stage; })
@@ -562,16 +600,31 @@
           node.fy = clamp(event.y, node.height / 2 + 5, height - node.height / 2 - 5);
           node.x = node.fx;
           node.y = node.fy;
+          if (node.type === "group") moveChildrenWithGroup(node);
           if (reducedMotion) update();
         })
         .on("end", function (_event, node) {
           node.element.classList.remove("is-dragging");
-          node.fx = node.x;
-          node.fy = node.y;
-          if (!reducedMotion) skillNetworkSimulation.alphaTarget(0).restart();
+          if (node.type === "skill") {
+            node.fx = null;
+            node.fy = null;
+          } else {
+            node.fx = node.x;
+            node.fy = node.y;
+            node.targetX = node.x;
+            node.targetY = node.y;
+            moveChildrenWithGroup(node);
+          }
+          if (reducedMotion) {
+            skillNetworkSimulation.alpha(0.34);
+            skillNetworkSimulation.tick(120);
+            update();
+          } else {
+            skillNetworkSimulation.alpha(0.38).alphaTarget(0).restart();
+          }
         });
 
-      skillNodes.forEach(function (node) {
+      nodes.forEach(function (node) {
         window.d3.select(node.control).datum(node).call(drag);
         node.control.addEventListener("keydown", function (event) {
           const step = event.shiftKey ? 20 : 8;
@@ -588,6 +641,11 @@
           node.fy = clamp(node.y + direction[1], node.height / 2 + 5, height - node.height / 2 - 5);
           node.x = node.fx;
           node.y = node.fy;
+          if (node.type === "group") {
+            node.targetX = node.x;
+            node.targetY = node.y;
+            moveChildrenWithGroup(node);
+          }
           node.vx = 0;
           node.vy = 0;
           update();
