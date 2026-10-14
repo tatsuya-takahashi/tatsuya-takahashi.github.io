@@ -201,9 +201,7 @@
     return (
       '<section class="content-section works-section" id="works" aria-labelledby="works-title">' +
       '<div class="section-heading"><div>' +
-      '<p class="section-note">' +
-      escapeHTML(localized(data.ui.worksNote)) +
-      "</p><h2 id=\"works-title\">" +
+      '<h2 id="works-title">' +
       escapeHTML(localized(data.ui.works)) +
       "</h2></div></div>" +
       '<div class="works-list">' +
