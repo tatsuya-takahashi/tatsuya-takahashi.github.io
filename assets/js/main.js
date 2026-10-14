@@ -117,7 +117,7 @@
       escapeHTML(localized(data.profile.role)) +
       "</p>" +
       '<h1 id="hero-title">' +
-      escapeHTML(data.profile.name) +
+      escapeHTML(localized(data.profile.name)) +
       "</h1>" +
       '<p class="hero-summary">' +
       escapeHTML(localized(data.profile.summary)) +
@@ -679,7 +679,7 @@
       escapeHTML(localized(data.ui.skipToContent)) +
       '</a><div class="page-shell"><header class="site-header">' +
       '<a class="brand" href="#top">' +
-      escapeHTML(data.profile.name) +
+      escapeHTML(localized(data.profile.name)) +
       '</a><div class="header-right"><nav class="primary-nav" aria-label="' +
       escapeHTML(localized(data.ui.navigationLabel)) +
       '"><a href="#works">' +
@@ -697,7 +697,7 @@
       renderSkills() +
       '</main><footer class="site-footer"><div class="footer-identity">' +
       '<a class="footer-name" href="#top">' +
-      escapeHTML(data.profile.name) +
+      escapeHTML(localized(data.profile.name)) +
       '</a><span class="footer-divider" aria-hidden="true"></span><span class="footer-role">' +
       escapeHTML(localized(data.profile.role)) +
       '</span></div><nav class="footer-links" aria-label="' +
