@@ -274,8 +274,9 @@ button {
   width: min(72%, 218px);
   aspect-ratio: 1;
   border-radius: 50%;
+  clip-path: circle(50%);
   object-fit: cover;
-  box-shadow: 0 0.8rem 2rem rgba(37, 50, 61, 0.08);
+  filter: drop-shadow(0 0.8rem 1.2rem rgba(37, 50, 61, 0.08));
 }
 
 .portrait-wash {
@@ -355,7 +356,7 @@ button {
 .work-item {
   min-height: 6.5rem;
   display: grid;
-  grid-template-columns: minmax(180px, 27%) minmax(0, 1fr) 2.25rem;
+  grid-template-columns: 180px minmax(0, 1fr) 2.25rem;
   align-items: center;
   gap: 1.9rem;
   padding: 0.42rem 0;
@@ -364,35 +365,12 @@ button {
 
 .work-image {
   width: 100%;
-  aspect-ratio: 3.15 / 1;
+  aspect-ratio: 1;
   display: block;
   border-radius: 0.22rem;
   background: #e6e6e0;
   object-fit: cover;
-}
-
-.work-image--app-icon {
-  border-radius: 0;
-  background: transparent;
-  object-fit: contain;
-  object-position: left center;
-}
-
-.work-image.work-image--landscape {
-  aspect-ratio: 16 / 9;
-}
-
-.work-image.work-image--poster {
-  aspect-ratio: 3 / 2;
-  object-position: center 40%;
-}
-
-.work-image.work-image--square {
-  width: clamp(72px, 9vw, 104px);
-  aspect-ratio: 1;
-  background: transparent;
-  object-fit: contain;
-  object-position: left center;
+  object-position: center;
 }
 
 .work-copy {
@@ -706,7 +684,7 @@ a.work-arrow:hover {
   }
 
   .work-item {
-    grid-template-columns: minmax(145px, 30%) minmax(0, 1fr) 1.75rem;
+    grid-template-columns: 145px minmax(0, 1fr) 1.75rem;
     gap: 1.1rem;
   }
 
@@ -813,10 +791,6 @@ a.work-arrow:hover {
     grid-template-columns: 112px minmax(0, 1fr) 1.25rem;
     gap: 0.8rem;
     padding-block: 0.55rem;
-  }
-
-  .work-image {
-    aspect-ratio: 1.55 / 1;
   }
 
   .work-category {

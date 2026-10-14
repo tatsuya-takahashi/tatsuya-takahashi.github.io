@@ -9,7 +9,6 @@
     en: A message platform that connects people through thoughtful letters in the digital age.
     ja: デジタル時代に、手紙を通じて人と人をつなぐメッセージプラットフォーム。
   image: /assets/works/letter-app-icon.png
-  imageVariant: app-icon
   imageAlt:
     en: The LETTER app icon with a handwritten L in navy ink
     ja: 藍色のインクでLを描いたLETTERアプリのアイコン
@@ -40,7 +39,6 @@
     en: A real-time performance system that lets a humanoid robot DJ with human-like expressiveness.
     ja: 人型ロボットが人間らしい表現でDJを行う、リアルタイムパフォーマンスシステム。
   image: /assets/works/humanoid-dj.png
-  imageVariant: landscape
   imageAlt:
     en: Audience watching the HUMANOID DJ performance under vivid projections
     ja: 鮮やかな映像の下でHUMANOID DJの公演を観る観客
@@ -56,7 +54,6 @@
     en: Live coding performances and workshops that share the joy of programming and creative engineering.
     ja: プログラミングとクリエイティブエンジニアリングの楽しさを共有する、ライブコーディング公演とワークショップ。
   image: /assets/works/python-live-coding.png
-  imageVariant: poster
   imageAlt:
     en: Python Live Coding event poster with the title in large type
     ja: Python Live Codingのタイトルを大きく配置したイベントポスター
@@ -72,7 +69,6 @@
     en: An audiovisual performance translating the movement of sardine schools into music and visuals.
     ja: イワシの群れの動きを音楽と映像に変換する、オーディオビジュアルパフォーマンス。
   image: /assets/works/dj-iwashi.png
-  imageVariant: square
   imageAlt:
     en: Illustration of a cat DJ wearing headphones at turntables
     ja: ヘッドホンをつけてターンテーブルを操る猫DJのイラスト
