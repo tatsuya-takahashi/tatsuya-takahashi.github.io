@@ -8,8 +8,8 @@
   --rule: #d8d9d6;
   --soft-blue: #e9efef;
   --chip: #eeefec;
-  --serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
-  --sans: Inter, "Avenir Next", Avenir, "Segoe UI", sans-serif;
+  --sans: "IBM Plex Sans JP", sans-serif;
+  --heading-accent: "Oxanium", "IBM Plex Sans JP", sans-serif;
   --page-width: 1120px;
   --section-space: clamp(2.8rem, 5vw, 4.2rem);
 
@@ -92,7 +92,6 @@ button {
 .brand,
 .footer-name {
   color: var(--ink);
-  font-family: var(--serif);
   font-size: 1.35rem;
   line-height: 1.1;
 }
@@ -174,7 +173,6 @@ button {
 .hero h1 {
   margin: 0;
   color: var(--ink);
-  font-family: var(--serif);
   font-size: clamp(2.5rem, 5vw, 3.5rem);
   font-weight: 500;
   letter-spacing: -0.035em;
@@ -318,7 +316,6 @@ button {
 .section-heading h2 {
   margin: 0;
   color: var(--ink);
-  font-family: var(--serif);
   font-size: clamp(2rem, 3.7vw, 2.7rem);
   font-weight: 500;
   letter-spacing: -0.025em;
@@ -374,7 +371,6 @@ button {
 .work-copy h3 {
   margin: 0;
   color: var(--ink);
-  font-family: var(--serif);
   font-size: 1.12rem;
   font-weight: 500;
   line-height: 1.3;
@@ -457,7 +453,6 @@ a.work-arrow:hover {
   margin: 0;
   padding-top: 0.12rem;
   color: var(--blue);
-  font-family: var(--serif);
   font-size: 0.9rem;
   white-space: nowrap;
 }
@@ -505,10 +500,15 @@ a.work-arrow:hover {
 .career-copy h3 {
   margin: 0;
   color: var(--ink);
-  font-family: var(--serif);
   font-size: 1.05rem;
   font-weight: 500;
   line-height: 1.35;
+}
+
+h1.heading-latin,
+h2.heading-latin,
+h3.heading-latin {
+  font-family: var(--heading-accent);
 }
 
 .career-role,
@@ -636,7 +636,6 @@ a.work-arrow:hover {
   color: var(--skill-accent, var(--blue));
   background: rgba(255, 255, 255, 0.94);
   box-shadow: 0 7px 24px rgba(31, 45, 64, 0.1);
-  font-family: var(--serif);
   font-size: 1.15rem;
   font-weight: 600;
   line-height: 1;

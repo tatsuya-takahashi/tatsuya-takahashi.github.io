@@ -34,6 +34,13 @@
     return value[locale] || value.en || "";
   }
 
+  function headingFontClass(value) {
+    const text = localized(value);
+    return /^[\x00-\x7F]+$/.test(text) && /[A-Za-z0-9]/.test(text)
+      ? "heading-latin"
+      : "";
+  }
+
   function escapeHTML(value) {
     return String(value == null ? "" : value)
       .replaceAll("&", "&amp;")
@@ -116,7 +123,9 @@
       '<p class="eyebrow">' +
       escapeHTML(localized(data.profile.role)) +
       "</p>" +
-      '<h1 id="hero-title">' +
+      '<h1 id="hero-title" class="' +
+      headingFontClass(data.profile.name) +
+      '">' +
       escapeHTML(localized(data.profile.name)) +
       "</h1>" +
       '<p class="hero-summary">' +
@@ -185,7 +194,9 @@
           '<div class="work-copy">' +
           '<p class="eyebrow work-category">' +
           escapeHTML(localized(work.category)) +
-          "</p><h3>" +
+          '</p><h3 class="' +
+          headingFontClass(title) +
+          '">' +
           titleMarkup +
           "</h3><p class=\"work-description\">" +
           escapeHTML(localized(work.description)) +
@@ -201,7 +212,9 @@
     return (
       '<section class="content-section works-section" id="works" aria-labelledby="works-title">' +
       '<div class="section-heading"><div>' +
-      '<h2 id="works-title">' +
+      '<h2 id="works-title" class="' +
+      headingFontClass(data.ui.works) +
+      '">' +
       escapeHTML(localized(data.ui.works)) +
       "</h2></div></div>" +
       '<div class="works-list">' +
@@ -218,7 +231,9 @@
           escapeHTML(localized(entry.years)) +
           '</p><span class="career-marker' +
           (index === 0 ? " career-marker--current" : "") +
-          '" aria-hidden="true"></span><div class="career-copy"><h3>' +
+          '" aria-hidden="true"></span><div class="career-copy"><h3 class="' +
+          headingFontClass(entry.title) +
+          '">' +
           escapeHTML(localized(entry.title)) +
           '</h3><p class="career-role"><span>' +
           escapeHTML(localized(data.ui.rolePrefix)) +
@@ -233,7 +248,9 @@
 
     return (
       '<section class="content-section career-section" id="career" aria-labelledby="career-title">' +
-      '<div class="section-heading"><h2 id="career-title">' +
+      '<div class="section-heading"><h2 id="career-title" class="' +
+      headingFontClass(data.ui.career) +
+      '">' +
       escapeHTML(localized(data.ui.career)) +
       "</h2></div><ol class=\"career-list\">" +
       entries +
@@ -286,7 +303,9 @@
 
     return (
       '<section class="content-section skills-section" id="skills" aria-labelledby="skills-title">' +
-      '<div class="section-heading"><h2 id="skills-title">' +
+      '<div class="section-heading"><h2 id="skills-title" class="' +
+      headingFontClass(data.ui.skills) +
+      '">' +
       escapeHTML(localized(data.ui.skills)) +
       '</h2></div><div class="skill-network-stage"><svg class="skill-network__edges" aria-hidden="true"></svg><ul class="skill-network" aria-label="' +
       escapeHTML(localized(data.ui.skills)) +
