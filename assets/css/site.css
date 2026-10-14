@@ -272,9 +272,9 @@ button {
   position: relative;
   z-index: 1;
   width: min(72%, 218px);
+  height: min(72%, 218px);
   aspect-ratio: 1;
   border-radius: 50%;
-  clip-path: circle(50%);
   object-fit: cover;
   filter: drop-shadow(0 0.8rem 1.2rem rgba(37, 50, 61, 0.08));
 }
@@ -301,18 +301,6 @@ button {
   height: 43%;
   opacity: 0.48;
   transform: rotate(-24deg);
-}
-
-.botanical {
-  position: absolute;
-  z-index: 2;
-  right: -2%;
-  bottom: -1%;
-  width: 34%;
-  height: 61%;
-  overflow: visible;
-  color: #9ba9a8;
-  stroke-width: 1;
 }
 
 .content-section {
@@ -778,15 +766,6 @@ a.work-arrow:hover {
 
   .hero-portrait {
     width: 130px;
-  }
-
-  .hero-portrait img {
-    width: 78%;
-  }
-
-  .botanical {
-    right: -4%;
-    width: 32%;
   }
 
   .social-links {

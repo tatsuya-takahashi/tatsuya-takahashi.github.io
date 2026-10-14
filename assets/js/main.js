@@ -131,17 +131,7 @@
       escapeHTML(data.profile.portrait) +
       '" alt="' +
       escapeHTML(localized(data.profile.portraitAlt)) +
-      '" width="180" height="180">' +
-      '<svg class="botanical" viewBox="0 0 120 180" aria-hidden="true">' +
-      '<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">' +
-      '<path d="M12 166C45 137 71 103 98 25"/>' +
-      '<path d="M38 143C22 136 16 124 17 111c13 4 22 13 21 26Z"/>' +
-      '<path d="M51 126c17 0 29-7 35-19-14-1-26 5-35 19Z"/>' +
-      '<path d="M62 103C46 96 40 85 42 73c13 5 21 15 20 30Z"/>' +
-      '<path d="M73 83c15 0 25-6 31-17-13-1-23 5-31 17Z"/>' +
-      '<path d="M84 57c-12-6-17-16-15-27 10 5 16 13 15 27Z"/>' +
-      '<path d="M92 39c11-3 18-10 21-20-10 2-17 8-21 20Z"/>' +
-      "</g></svg></div></section>"
+      '" width="180" height="180"></div></section>'
     );
   }
 
