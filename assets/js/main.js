@@ -7,6 +7,10 @@
 
   const data = JSON.parse(dataElement.textContent || "{}");
   const locales = ["en", "ja"];
+  let skillSimulation = null;
+  let skillCloudResizeObserver = null;
+  let skillCloudResizeFrame = null;
+  let skillCloudResizeHandler = null;
 
   function savedLocale() {
     try {
@@ -244,41 +248,23 @@
     );
   }
 
-  function skillSymbol(icon) {
-    const symbols = {
-      code: "&lt;/&gt;",
-      data: "▥",
-      layers: "◇",
-      creative: "✳",
-      cloud: "⌂",
-      language: "文",
-    };
-    return symbols[icon] || "•";
-  }
-
   function renderSkills() {
-    const groups = data.skills
-      .map(function (group) {
-        const items = group.items
-          .map(function (item) {
-            return "<li>" + escapeHTML(localized(item)) + "</li>";
-          })
-          .join("");
+    const items = data.skills
+      .map(function (skill) {
+        const iconMarkup = /^[a-z0-9-]+$/.test(skill.icon || "")
+          ? '<img class="skill-cloud__icon" src="/assets/icons/skills/' +
+            escapeHTML(skill.icon) +
+            '.svg" alt="" aria-hidden="true" width="20" height="20">'
+          : skillGlyph(skill.glyph);
 
         return (
-          '<section class="skill-group" aria-labelledby="skill-' +
-          escapeHTML(group.id) +
-          '"><div class="skill-heading"><span class="skill-symbol skill-symbol--' +
-          escapeHTML(group.icon) +
-          '" aria-hidden="true">' +
-          skillSymbol(group.icon) +
-          '</span><h3 id="skill-' +
-          escapeHTML(group.id) +
-          '">' +
-          escapeHTML(localized(group.title)) +
-          '</h3></div><ul class="skill-list">' +
-          items +
-          "</ul></section>"
+          '<li class="skill-cloud__item" data-skill="' +
+          escapeHTML(skill.id) +
+          '"><span class="skill-cloud__chip">' +
+          iconMarkup +
+          '<span class="skill-cloud__name">' +
+          escapeHTML(localized(skill.name)) +
+          "</span></span></li>"
         );
       })
       .join("");
@@ -287,10 +273,227 @@
       '<section class="content-section skills-section" id="skills" aria-labelledby="skills-title">' +
       '<div class="section-heading"><h2 id="skills-title">' +
       escapeHTML(localized(data.ui.skills)) +
-      "</h2></div><div class=\"skills-grid\">" +
-      groups +
-      "</div></section>"
+      '</h2></div><div class="skill-cloud-stage"><ul class="skill-cloud" aria-label="' +
+      escapeHTML(localized(data.ui.skills)) +
+      '">' +
+      items +
+      "</ul></div></section>"
     );
+  }
+
+  function skillGlyph(name) {
+    const paths = {
+      sparkles:
+        '<path d="m12 3 1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7L12 3Z"/><path d="m19 14 .9 2.1L22 17l-2.1.9L19 20l-.9-2.1L16 17l2.1-.9L19 14Z"/>',
+      cpu:
+        '<rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 9h6v6H9zM9 2v4m6-4v4m-6 12v4m6-4v4M2 9h4m-4 6h4m12-6h4m-4 6h4"/>',
+      cloud:
+        '<path d="M7.5 18h9.6a4.4 4.4 0 0 0 .4-8.8 6 6 0 0 0-11.4.6A4.1 4.1 0 0 0 7.5 18Z"/>',
+      layers:
+        '<path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5M3 16l9 5 9-5"/>',
+      bolt: '<path d="m13 2-9 12h7l-1 8 10-13h-7l1-7Z"/>',
+      database:
+        '<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/>',
+      network:
+        '<circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="18" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="m10.8 7.2-4.6 8.6m7-8.6 4.6 8.6M7.5 18h9"/>',
+    };
+    return (
+      '<svg class="skill-cloud__fallback-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">' +
+      (paths[name] || paths.sparkles) +
+      "</g></svg>"
+    );
+  }
+
+  function forceRectCollide(gap) {
+    let nodes = [];
+    const padding = gap || 12;
+
+    function force(alpha) {
+      for (let iteration = 0; iteration < 3; iteration += 1) {
+        for (let left = 0; left < nodes.length; left += 1) {
+          const a = nodes[left];
+          for (let right = left + 1; right < nodes.length; right += 1) {
+            const b = nodes[right];
+            const dx = b.x - a.x;
+            const dy = b.y - a.y;
+            const overlapX = (a.width + b.width) / 2 + padding - Math.abs(dx);
+            const overlapY = (a.height + b.height) / 2 + padding - Math.abs(dy);
+
+            if (overlapX <= 0 || overlapY <= 0) continue;
+
+            const directionX = dx === 0 ? (left % 2 === 0 ? 1 : -1) : Math.sign(dx);
+            const directionY = dy === 0 ? (right % 2 === 0 ? 1 : -1) : Math.sign(dy);
+            if (overlapX < overlapY) {
+              const shift = (overlapX * alpha) / 2;
+              a.vx -= directionX * shift;
+              b.vx += directionX * shift;
+            } else {
+              const shift = (overlapY * alpha) / 2;
+              a.vy -= directionY * shift;
+              b.vy += directionY * shift;
+            }
+          }
+        }
+      }
+    }
+
+    force.initialize = function (nextNodes) {
+      nodes = nextNodes;
+    };
+    return force;
+  }
+
+  function settleSkillCloud(nodes, width, height) {
+    const gap = 16;
+    const clamp = function (value, min, max) {
+      return Math.max(min, Math.min(max, value));
+    };
+
+    for (let pass = 0; pass < 120; pass += 1) {
+      let foundOverlap = false;
+      for (let left = 0; left < nodes.length; left += 1) {
+        const a = nodes[left];
+        for (let right = left + 1; right < nodes.length; right += 1) {
+          const b = nodes[right];
+          const dx = b.x - a.x;
+          const dy = b.y - a.y;
+          const overlapX = (a.width + b.width) / 2 + gap - Math.abs(dx);
+          const overlapY = (a.height + b.height) / 2 + gap - Math.abs(dy);
+          if (overlapX <= 0 || overlapY <= 0) continue;
+
+          foundOverlap = true;
+          const useX = overlapX < overlapY;
+          const overlap = (useX ? overlapX : overlapY) + 1;
+          const axis = useX ? "x" : "y";
+          const direction = (useX ? dx : dy) === 0
+            ? ((left + right) % 2 === 0 ? 1 : -1)
+            : Math.sign(useX ? dx : dy);
+          const availableA = useX
+            ? [a.width / 2 + 4, width - a.width / 2 - 4]
+            : [a.height / 2 + 4, height - a.height / 2 - 4];
+          const availableB = useX
+            ? [b.width / 2 + 4, width - b.width / 2 - 4]
+            : [b.height / 2 + 4, height - b.height / 2 - 4];
+          const beforeA = a[axis];
+          const beforeB = b[axis];
+          a[axis] = clamp(beforeA - direction * overlap / 2, availableA[0], availableA[1]);
+          b[axis] = clamp(beforeB + direction * overlap / 2, availableB[0], availableB[1]);
+
+          let remaining = overlap - Math.abs(a[axis] - beforeA) - Math.abs(b[axis] - beforeB);
+          if (remaining > 0) {
+            b[axis] = clamp(b[axis] + direction * remaining, availableB[0], availableB[1]);
+            remaining = overlap - Math.abs(a[axis] - beforeA) - Math.abs(b[axis] - beforeB);
+          }
+          if (remaining > 0) {
+            a[axis] = clamp(a[axis] - direction * remaining, availableA[0], availableA[1]);
+          }
+        }
+      }
+      if (!foundOverlap) break;
+    }
+  }
+
+  function stopSkillCloud() {
+    if (skillSimulation) skillSimulation.stop();
+    if (skillCloudResizeObserver) skillCloudResizeObserver.disconnect();
+    if (skillCloudResizeHandler) {
+      window.removeEventListener("resize", skillCloudResizeHandler);
+    }
+    if (skillCloudResizeFrame !== null) {
+      window.cancelAnimationFrame(skillCloudResizeFrame);
+      skillCloudResizeFrame = null;
+    }
+    skillSimulation = null;
+    skillCloudResizeObserver = null;
+    skillCloudResizeHandler = null;
+  }
+
+  function initializeSkillCloud() {
+    stopSkillCloud();
+    const stage = root.querySelector(".skill-cloud-stage");
+    const list = stage && stage.querySelector(".skill-cloud");
+    if (!stage || !list) return;
+
+    const items = Array.from(list.querySelectorAll(".skill-cloud__item"));
+    if (!window.d3 || !items.length) {
+      list.classList.add("skill-cloud--static");
+      return;
+    }
+
+    function layout() {
+      const width = stage.clientWidth;
+      const height = stage.clientHeight;
+      if (!width || !height) return;
+      if (skillSimulation) skillSimulation.stop();
+
+      const centerX = width / 2;
+      const centerY = height / 2;
+      const nodes = items.map(function (element, index) {
+        const fontSizes = [0.94, 1.08, 0.98, 1.14, 1.02, 0.91, 1.06];
+        element.style.setProperty("--skill-size", fontSizes[index % fontSizes.length] + "rem");
+        const bounds = element.getBoundingClientRect();
+        const nodeWidth = bounds.width;
+        const nodeHeight = bounds.height;
+        const spread = Math.sqrt((index + 0.5) / items.length);
+        const angle = index * 2.399963229728653;
+        const radialX = Math.max(0, width / 2 - nodeWidth / 2 - 12);
+        const radialY = Math.max(0, height / 2 - nodeHeight / 2 - 12);
+
+        return {
+          element: element,
+          width: nodeWidth,
+          height: nodeHeight,
+          x: centerX + ((index % 3) - 1) * 1.5,
+          y: centerY + ((index % 4) - 1.5) * 1.5,
+          targetX: centerX + Math.cos(angle) * spread * radialX,
+          targetY: centerY + Math.sin(angle) * spread * radialY,
+        };
+      });
+
+      skillSimulation = window.d3
+        .forceSimulation(nodes)
+        .velocityDecay(0.38)
+        .alphaDecay(0.025)
+        .force("x", window.d3.forceX(function (node) { return node.targetX; }).strength(0.12))
+        .force("y", window.d3.forceY(function (node) { return node.targetY; }).strength(0.15))
+        .force("rect-collide", forceRectCollide(12));
+
+      function update() {
+        nodes.forEach(function (node) {
+          const x = Math.max(node.width / 2 + 4, Math.min(width - node.width / 2 - 4, node.x));
+          const y = Math.max(node.height / 2 + 4, Math.min(height - node.height / 2 - 4, node.y));
+          node.element.style.transform =
+            "translate(" + (x - node.width / 2) + "px, " + (y - node.height / 2) + "px)";
+        });
+      }
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        skillSimulation.stop();
+        skillSimulation.tick(320);
+        settleSkillCloud(nodes, width, height);
+        update();
+      } else {
+        skillSimulation.on("tick", update).on("end", function () {
+          settleSkillCloud(nodes, width, height);
+          update();
+        });
+      }
+    }
+
+    layout();
+    if ("ResizeObserver" in window) {
+      skillCloudResizeObserver = new ResizeObserver(function () {
+        if (skillCloudResizeFrame !== null) window.cancelAnimationFrame(skillCloudResizeFrame);
+        skillCloudResizeFrame = window.requestAnimationFrame(function () {
+          skillCloudResizeFrame = null;
+          layout();
+        });
+      });
+      skillCloudResizeObserver.observe(stage);
+    } else {
+      skillCloudResizeHandler = layout;
+      window.addEventListener("resize", skillCloudResizeHandler, { passive: true });
+    }
   }
 
   function render() {
@@ -334,6 +537,8 @@
         return renderSocialLink(link, true);
       }).join("") +
       '</nav></footer></div><p class="visually-hidden" id="language-status" aria-live="polite"></p>';
+
+    initializeSkillCloud();
 
     root.querySelectorAll("[data-locale]").forEach(function (button) {
       button.addEventListener("click", function () {
