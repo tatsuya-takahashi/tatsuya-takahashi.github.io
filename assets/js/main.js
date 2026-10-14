@@ -7,10 +7,15 @@
 
   const data = JSON.parse(dataElement.textContent || "{}");
   const locales = ["en", "ja"];
-  let skillSimulation = null;
-  let skillCloudResizeObserver = null;
-  let skillCloudResizeFrame = null;
-  let skillCloudResizeHandler = null;
+  const skillGroups = [
+    { id: "llm", name: "LLM" },
+    { id: "cloud", name: "Cloud" },
+    { id: "programming", name: "Programming" },
+  ];
+  let skillNetworkSimulation = null;
+  let skillNetworkResizeObserver = null;
+  let skillNetworkResizeFrame = null;
+  let skillNetworkResizeHandler = null;
 
   function savedLocale() {
     try {
@@ -239,31 +244,53 @@
   }
 
   function renderSkills() {
-    const items = data.skills
-      .map(function (skill) {
-        const iconMarkup = /^[a-z0-9-]+$/.test(skill.icon || "")
-          ? '<img class="skill-cloud__icon" src="/assets/icons/skills/' +
-            escapeHTML(skill.icon) +
-            '.svg" alt="" aria-hidden="true" width="20" height="20">'
-          : skillGlyph(skill.glyph);
+    const items = skillGroups
+      .map(function (group) {
+        const groupNode =
+          '<li class="skill-network__item skill-network__item--group" data-node-id="group-' +
+          escapeHTML(group.id) +
+          '" data-category="' +
+          escapeHTML(group.id) +
+          '"><span class="skill-network__group-node">' +
+          escapeHTML(group.name) +
+          "</span></li>";
+        const skillNodes = data.skills
+          .filter(function (skill) { return skill.category === group.id; })
+          .map(function (skill) {
+            const iconMarkup = /^[a-z0-9-]+$/.test(skill.icon || "")
+              ? '<img class="skill-network__icon" src="/assets/icons/skills/' +
+                escapeHTML(skill.icon) +
+                '.svg" alt="" aria-hidden="true" width="20" height="20">'
+              : skillGlyph(skill.glyph);
 
-        return (
-          '<li class="skill-cloud__item" data-skill="' +
-          escapeHTML(skill.id) +
-          '"><span class="skill-cloud__chip">' +
-          iconMarkup +
-          '<span class="skill-cloud__name">' +
-          escapeHTML(localized(skill.name)) +
-          "</span></span></li>"
-        );
+            return (
+              '<li class="skill-network__item skill-network__item--skill" data-node-id="' +
+              escapeHTML(skill.id) +
+              '" data-skill="' +
+              escapeHTML(skill.id) +
+              '" data-category="' +
+              escapeHTML(skill.category) +
+              '"><button class="skill-network__skill-node" type="button" aria-label="' +
+              escapeHTML(localized(skill.name) + ". " + localized(data.ui.skillsDragHint)) +
+              '">' +
+              iconMarkup +
+              '<span class="skill-network__name">' +
+              escapeHTML(localized(skill.name)) +
+              "</span></button></li>"
+            );
+          })
+          .join("");
+        return groupNode + skillNodes;
       })
       .join("");
 
     return (
       '<section class="content-section skills-section" id="skills" aria-labelledby="skills-title">' +
-      '<div class="section-heading"><h2 id="skills-title">' +
+      '<div class="section-heading skills-heading"><h2 id="skills-title">' +
       escapeHTML(localized(data.ui.skills)) +
-      '</h2></div><div class="skill-cloud-stage"><ul class="skill-cloud" aria-label="' +
+      '</h2><p class="skill-network-hint">' +
+      escapeHTML(localized(data.ui.skillsDragHint)) +
+      '</p></div><div class="skill-network-stage"><svg class="skill-network__edges" aria-hidden="true"></svg><ul class="skill-network" aria-label="' +
       escapeHTML(localized(data.ui.skills)) +
       '">' +
       items +
@@ -288,7 +315,7 @@
         '<circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="18" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="m10.8 7.2-4.6 8.6m7-8.6 4.6 8.6M7.5 18h9"/>',
     };
     return (
-      '<svg class="skill-cloud__fallback-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">' +
+      '<svg class="skill-network__fallback-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">' +
       (paths[name] || paths.sparkles) +
       "</g></svg>"
     );
@@ -333,156 +360,255 @@
     return force;
   }
 
-  function settleSkillCloud(nodes, width, height) {
-    const gap = 16;
+  function stopSkillNetwork() {
+    if (skillNetworkSimulation) skillNetworkSimulation.stop();
+    if (skillNetworkResizeObserver) skillNetworkResizeObserver.disconnect();
+    if (skillNetworkResizeHandler) {
+      window.removeEventListener("resize", skillNetworkResizeHandler);
+    }
+    if (skillNetworkResizeFrame !== null) {
+      window.cancelAnimationFrame(skillNetworkResizeFrame);
+      skillNetworkResizeFrame = null;
+    }
+    skillNetworkSimulation = null;
+    skillNetworkResizeObserver = null;
+    skillNetworkResizeHandler = null;
+  }
+
+  function initializeSkillNetwork() {
+    stopSkillNetwork();
+    const stage = root.querySelector(".skill-network-stage");
+    const list = stage && stage.querySelector(".skill-network");
+    const edgeSvg = stage && stage.querySelector(".skill-network__edges");
+    if (!stage || !list || !edgeSvg) return;
+
+    const items = Array.from(list.querySelectorAll(".skill-network__item"));
+    if (!window.d3 || !items.length) {
+      stage.classList.add("skill-network-stage--static");
+      list.classList.add("skill-network--static");
+      return;
+    }
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const clamp = function (value, min, max) {
       return Math.max(min, Math.min(max, value));
     };
-
-    for (let pass = 0; pass < 120; pass += 1) {
-      let foundOverlap = false;
-      for (let left = 0; left < nodes.length; left += 1) {
-        const a = nodes[left];
-        for (let right = left + 1; right < nodes.length; right += 1) {
-          const b = nodes[right];
-          const dx = b.x - a.x;
-          const dy = b.y - a.y;
-          const overlapX = (a.width + b.width) / 2 + gap - Math.abs(dx);
-          const overlapY = (a.height + b.height) / 2 + gap - Math.abs(dy);
-          if (overlapX <= 0 || overlapY <= 0) continue;
-
-          foundOverlap = true;
-          const useX = overlapX < overlapY;
-          const overlap = (useX ? overlapX : overlapY) + 1;
-          const axis = useX ? "x" : "y";
-          const direction = (useX ? dx : dy) === 0
-            ? ((left + right) % 2 === 0 ? 1 : -1)
-            : Math.sign(useX ? dx : dy);
-          const availableA = useX
-            ? [a.width / 2 + 4, width - a.width / 2 - 4]
-            : [a.height / 2 + 4, height - a.height / 2 - 4];
-          const availableB = useX
-            ? [b.width / 2 + 4, width - b.width / 2 - 4]
-            : [b.height / 2 + 4, height - b.height / 2 - 4];
-          const beforeA = a[axis];
-          const beforeB = b[axis];
-          a[axis] = clamp(beforeA - direction * overlap / 2, availableA[0], availableA[1]);
-          b[axis] = clamp(beforeB + direction * overlap / 2, availableB[0], availableB[1]);
-
-          let remaining = overlap - Math.abs(a[axis] - beforeA) - Math.abs(b[axis] - beforeB);
-          if (remaining > 0) {
-            b[axis] = clamp(b[axis] + direction * remaining, availableB[0], availableB[1]);
-            remaining = overlap - Math.abs(a[axis] - beforeA) - Math.abs(b[axis] - beforeB);
-          }
-          if (remaining > 0) {
-            a[axis] = clamp(a[axis] - direction * remaining, availableA[0], availableA[1]);
-          }
-        }
-      }
-      if (!foundOverlap) break;
-    }
-  }
-
-  function stopSkillCloud() {
-    if (skillSimulation) skillSimulation.stop();
-    if (skillCloudResizeObserver) skillCloudResizeObserver.disconnect();
-    if (skillCloudResizeHandler) {
-      window.removeEventListener("resize", skillCloudResizeHandler);
-    }
-    if (skillCloudResizeFrame !== null) {
-      window.cancelAnimationFrame(skillCloudResizeFrame);
-      skillCloudResizeFrame = null;
-    }
-    skillSimulation = null;
-    skillCloudResizeObserver = null;
-    skillCloudResizeHandler = null;
-  }
-
-  function initializeSkillCloud() {
-    stopSkillCloud();
-    const stage = root.querySelector(".skill-cloud-stage");
-    const list = stage && stage.querySelector(".skill-cloud");
-    if (!stage || !list) return;
-
-    const items = Array.from(list.querySelectorAll(".skill-cloud__item"));
-    if (!window.d3 || !items.length) {
-      list.classList.add("skill-cloud--static");
-      return;
-    }
 
     function layout() {
       const width = stage.clientWidth;
       const height = stage.clientHeight;
       if (!width || !height) return;
-      if (skillSimulation) skillSimulation.stop();
+      if (skillNetworkSimulation) skillNetworkSimulation.stop();
+      list.classList.remove("skill-network--ready");
+      items.forEach(function (item) {
+        item.style.transform = "translate(0px, 0px)";
+      });
+      edgeSvg.replaceChildren();
 
-      const centerX = width / 2;
-      const centerY = height / 2;
-      const nodes = items.map(function (element, index) {
-        const fontSizes = [0.94, 1.08, 0.98, 1.14, 1.02, 0.91, 1.06];
-        element.style.setProperty("--skill-size", fontSizes[index % fontSizes.length] + "rem");
+      const compact = width <= 600;
+      const anchors = compact
+        ? {
+            llm: { x: width * 0.5, y: height * 0.16 },
+            cloud: { x: width * 0.5, y: height * 0.5 },
+            programming: { x: width * 0.5, y: height * 0.84 },
+          }
+        : {
+            llm: { x: width * 0.24, y: height * 0.32 },
+            cloud: { x: width * 0.76, y: height * 0.32 },
+            programming: { x: width * 0.5, y: height * 0.77 },
+          };
+
+      const groupNodes = skillGroups.map(function (group) {
+        const element = items.find(function (item) {
+          return item.dataset.nodeId === "group-" + group.id;
+        });
         const bounds = element.getBoundingClientRect();
-        const nodeWidth = bounds.width;
-        const nodeHeight = bounds.height;
-        const spread = Math.sqrt((index + 0.5) / items.length);
-        const angle = index * 2.399963229728653;
-        const radialX = Math.max(0, width / 2 - nodeWidth / 2 - 12);
-        const radialY = Math.max(0, height / 2 - nodeHeight / 2 - 12);
-
+        const anchor = anchors[group.id];
+        const x = clamp(anchor.x, bounds.width / 2 + 8, width - bounds.width / 2 - 8);
+        const y = clamp(anchor.y, bounds.height / 2 + 8, height - bounds.height / 2 - 8);
         return {
+          id: "group-" + group.id,
+          type: "group",
+          category: group.id,
           element: element,
-          width: nodeWidth,
-          height: nodeHeight,
-          x: centerX + ((index % 3) - 1) * 1.5,
-          y: centerY + ((index % 4) - 1.5) * 1.5,
-          targetX: centerX + Math.cos(angle) * spread * radialX,
-          targetY: centerY + Math.sin(angle) * spread * radialY,
+          width: bounds.width,
+          height: bounds.height,
+          x: x,
+          y: y,
+          fx: x,
+          fy: y,
+          targetX: x,
+          targetY: y,
+        };
+      });
+      const groupById = new Map(groupNodes.map(function (node) { return [node.category, node]; }));
+      const childIndexes = Object.create(null);
+      const childCounts = Object.create(null);
+      data.skills.forEach(function (skill) {
+        childCounts[skill.category] = (childCounts[skill.category] || 0) + 1;
+      });
+
+      const skillNodes = data.skills.map(function (skill, index) {
+        const element = items.find(function (item) {
+          return item.dataset.nodeId === skill.id;
+        });
+        const control = element.querySelector(".skill-network__skill-node");
+        const bounds = control.getBoundingClientRect();
+        control.style.setProperty("--skill-float-delay", index * -0.45 + "s");
+        const group = groupById.get(skill.category);
+        const childIndex = childIndexes[skill.category] || 0;
+        childIndexes[skill.category] = childIndex + 1;
+        const count = childCounts[skill.category] || 1;
+        const angle = (childIndex / count) * Math.PI * 2 - Math.PI / 2;
+        const radiusX = Math.min(width * (compact ? 0.24 : 0.13), compact ? 88 : 148);
+        const radiusY = compact ? 94 : 126;
+        const offsetX = Math.cos(angle) * radiusX;
+        const offsetY = Math.sin(angle) * radiusY;
+        const x = clamp(group.x + offsetX, bounds.width / 2 + 5, width - bounds.width / 2 - 5);
+        const y = clamp(group.y + offsetY, bounds.height / 2 + 5, height - bounds.height / 2 - 5);
+        return {
+          id: skill.id,
+          type: "skill",
+          category: skill.category,
+          element: element,
+          control: control,
+          width: bounds.width,
+          height: bounds.height,
+          x: x,
+          y: y,
+          targetX: x,
+          targetY: y,
+          offsetX: offsetX,
+          offsetY: offsetY,
+        };
+      });
+      const nodes = groupNodes.concat(skillNodes);
+      const links = skillNodes.map(function (node) {
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        line.setAttribute("class", "skill-network__edge");
+        line.setAttribute("data-category", node.category);
+        edgeSvg.appendChild(line);
+        return {
+          source: node.id,
+          target: "group-" + node.category,
+          line: line,
         };
       });
 
-      skillSimulation = window.d3
+      skillNetworkSimulation = window.d3
         .forceSimulation(nodes)
-        .velocityDecay(0.38)
-        .alphaDecay(0.025)
-        .force("x", window.d3.forceX(function (node) { return node.targetX; }).strength(0.12))
-        .force("y", window.d3.forceY(function (node) { return node.targetY; }).strength(0.15))
+        .velocityDecay(0.62)
+          .alphaDecay(0.035)
+        .force(
+          "link",
+          window.d3.forceLink(links).id(function (node) { return node.id; }).distance(compact ? 110 : 132).strength(0.2),
+        )
+        .force("charge", window.d3.forceManyBody().strength(function (node) {
+          return node.type === "group" ? -38 : -18;
+        }))
+        .force("x", window.d3.forceX(function (node) { return node.targetX; }).strength(0.045))
+        .force("y", window.d3.forceY(function (node) { return node.targetY; }).strength(0.055))
         .force("rect-collide", forceRectCollide(12));
 
       function update() {
         nodes.forEach(function (node) {
-          const x = Math.max(node.width / 2 + 4, Math.min(width - node.width / 2 - 4, node.x));
-          const y = Math.max(node.height / 2 + 4, Math.min(height - node.height / 2 - 4, node.y));
+          if (node.type === "skill") {
+            node.x = node.fx === null || node.fx === undefined
+              ? clamp(node.x, node.width / 2 + 5, width - node.width / 2 - 5)
+              : clamp(node.fx, node.width / 2 + 5, width - node.width / 2 - 5);
+            node.y = node.fy === null || node.fy === undefined
+              ? clamp(node.y, node.height / 2 + 5, height - node.height / 2 - 5)
+              : clamp(node.fy, node.height / 2 + 5, height - node.height / 2 - 5);
+            if (node.fx !== null && node.fx !== undefined) node.fx = node.x;
+            if (node.fy !== null && node.fy !== undefined) node.fy = node.y;
+          }
           node.element.style.transform =
-            "translate(" + (x - node.width / 2) + "px, " + (y - node.height / 2) + "px)";
+            "translate(" + (node.x - node.width / 2) + "px, " + (node.y - node.height / 2) + "px)";
+        });
+
+        links.forEach(function (link) {
+          link.line.setAttribute("x1", link.source.x);
+          link.line.setAttribute("y1", link.source.y);
+          link.line.setAttribute("x2", link.target.x);
+          link.line.setAttribute("y2", link.target.y);
         });
       }
 
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        skillSimulation.stop();
-        skillSimulation.tick(320);
-        settleSkillCloud(nodes, width, height);
+      skillNetworkSimulation.on("tick", update);
+      if (reducedMotion) {
+        skillNetworkSimulation.stop();
+        skillNetworkSimulation.tick(360);
         update();
+        list.classList.add("skill-network--ready");
       } else {
-        skillSimulation.on("tick", update).on("end", function () {
-          settleSkillCloud(nodes, width, height);
+        skillNetworkSimulation.on("end", function () {
           update();
+          list.classList.add("skill-network--ready");
         });
       }
+
+      const drag = window.d3
+        .drag()
+        .container(function () { return stage; })
+        .subject(function (_event, node) { return node; })
+        .on("start", function (event, node) {
+          node.fx = node.x;
+          node.fy = node.y;
+          node.element.classList.add("is-dragging");
+          if (!reducedMotion) skillNetworkSimulation.alphaTarget(0.12).restart();
+        })
+        .on("drag", function (event, node) {
+          node.fx = clamp(event.x, node.width / 2 + 5, width - node.width / 2 - 5);
+          node.fy = clamp(event.y, node.height / 2 + 5, height - node.height / 2 - 5);
+          node.x = node.fx;
+          node.y = node.fy;
+          if (reducedMotion) update();
+        })
+        .on("end", function (_event, node) {
+          node.element.classList.remove("is-dragging");
+          node.fx = node.x;
+          node.fy = node.y;
+          if (!reducedMotion) skillNetworkSimulation.alphaTarget(0).restart();
+        });
+
+      skillNodes.forEach(function (node) {
+        window.d3.select(node.control).datum(node).call(drag);
+        node.control.addEventListener("keydown", function (event) {
+          const step = event.shiftKey ? 20 : 8;
+          const directions = {
+            ArrowLeft: [-step, 0],
+            ArrowRight: [step, 0],
+            ArrowUp: [0, -step],
+            ArrowDown: [0, step],
+          };
+          const direction = directions[event.key];
+          if (!direction) return;
+          event.preventDefault();
+          node.fx = clamp(node.x + direction[0], node.width / 2 + 5, width - node.width / 2 - 5);
+          node.fy = clamp(node.y + direction[1], node.height / 2 + 5, height - node.height / 2 - 5);
+          node.x = node.fx;
+          node.y = node.fy;
+          node.vx = 0;
+          node.vy = 0;
+          update();
+          if (!reducedMotion) skillNetworkSimulation.alpha(0.14).alphaTarget(0).restart();
+        });
+      });
     }
 
     layout();
     if ("ResizeObserver" in window) {
-      skillCloudResizeObserver = new ResizeObserver(function () {
-        if (skillCloudResizeFrame !== null) window.cancelAnimationFrame(skillCloudResizeFrame);
-        skillCloudResizeFrame = window.requestAnimationFrame(function () {
-          skillCloudResizeFrame = null;
+      skillNetworkResizeObserver = new ResizeObserver(function () {
+        if (skillNetworkResizeFrame !== null) window.cancelAnimationFrame(skillNetworkResizeFrame);
+        skillNetworkResizeFrame = window.requestAnimationFrame(function () {
+          skillNetworkResizeFrame = null;
           layout();
         });
       });
-      skillCloudResizeObserver.observe(stage);
+      skillNetworkResizeObserver.observe(stage);
     } else {
-      skillCloudResizeHandler = layout;
-      window.addEventListener("resize", skillCloudResizeHandler, { passive: true });
+      skillNetworkResizeHandler = layout;
+      window.addEventListener("resize", skillNetworkResizeHandler, { passive: true });
     }
   }
 
@@ -528,7 +654,7 @@
       }).join("") +
       '</nav></footer></div><p class="visually-hidden" id="language-status" aria-live="polite"></p>';
 
-    initializeSkillCloud();
+    initializeSkillNetwork();
 
     root.querySelectorAll("[data-locale]").forEach(function (button) {
       button.addEventListener("click", function () {

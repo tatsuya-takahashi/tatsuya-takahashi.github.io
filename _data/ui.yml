@@ -26,6 +26,9 @@ career:
 skills:
   en: Skills
   ja: スキル
+skillsDragHint:
+  en: Drag skills to explore
+  ja: スキルをドラッグして動かせます
 rolePrefix:
   en: "Role:"
   ja: "役割："

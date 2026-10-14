@@ -1,6 +1,6 @@
 # Tatsuya Takahashi — Portfolio
 
-Jekyll renders this one-page portfolio from the YAML files in _data/. The page uses plain JavaScript and CSS, with no frontend framework. D3 v7.9.0 is vendored locally for the animated skills cloud; its license is in assets/js/D3-LICENSE.txt.
+Jekyll renders this one-page portfolio from the YAML files in _data/. The page uses plain JavaScript and CSS, with no frontend framework. D3 v7.9.0 is vendored locally for the draggable, gently floating skills graph; its license is in assets/js/D3-LICENSE.txt.
 
 ## Local preview
 
@@ -16,7 +16,7 @@ All portfolio copy and facts live in YAML:
 - _data/links.yml — LinkedIn, X, GitHub, Kaggle, and email URLs.
 - _data/works.yml — the five featured projects and their images.
 - _data/career.yml — career dates, roles, and descriptions.
-- _data/skills.yml — the flat skills cloud list.
+- _data/skills.yml — skill names, icons, and LLM / Cloud / Programming group assignments.
 - _data/ui.yml — navigation, section headings, accessibility labels, and page titles in English and Japanese.
 
 Localized copy keeps both en and ja values so language switching stays complete. The skill labels are product names and are shared between languages. The career dates are provisional and can be changed in _data/career.yml. The GitHub URL is a placeholder; replace it with the correct profile URL in _data/links.yml.
