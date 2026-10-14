@@ -1,0 +1,25 @@
+- id: linkedin
+  label:
+    en: LinkedIn
+    ja: LinkedIn
+  url: "https://www.linkedin.com/in/tatsuya-takahashi-84b94215a/"
+- id: x
+  label:
+    en: X
+    ja: X
+  url: "https://twitter.com/iwashi_ser"
+- id: github
+  label:
+    en: GitHub
+    ja: GitHub
+  url: "https://github.com/"
+- id: kaggle
+  label:
+    en: Kaggle
+    ja: Kaggle
+  url: "https://www.kaggle.com/tatsuyatakahashi"
+- id: email
+  label:
+    en: Email
+    ja: メール
+  url: "mailto:ta.takahashi111@gmail.com"

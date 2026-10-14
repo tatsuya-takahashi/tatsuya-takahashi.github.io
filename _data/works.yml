@@ -1,0 +1,75 @@
+- id: letter
+  title:
+    en: LETTER
+    ja: LETTER
+  category:
+    en: iOS Application
+    ja: iOSアプリケーション
+  description:
+    en: A message platform that connects people through thoughtful letters in the digital age.
+    ja: デジタル時代に、手紙を通じて人と人をつなぐメッセージプラットフォーム。
+  image: /assets/works/letter-app-icon.png
+  imageAlt:
+    en: The LETTER app icon with a handwritten L in navy ink
+    ja: 藍色のインクでLを描いたLETTERアプリのアイコン
+  url:
+- id: citation-viewer
+  title:
+    en: Citation Viewer
+    ja: Citation Viewer
+  category:
+    en: Research Tool
+    ja: 研究支援ツール
+  description:
+    en: A tool for visualizing and exploring academic citations, making research discovery more intuitive and accessible.
+    ja: 論文の引用関係を可視化して探索できるツール。研究のつながりを、より直感的に見つけられます。
+  image: /assets/works/citation-viewer.png
+  imageAlt:
+    en: Citation Viewer start screen with a citation graph and JSON file button
+    ja: 引用関係のグラフとJSONファイル選択ボタンを表示したCitation Viewerの画面
+  url: "https://zenn.dev/iwashi_ser/articles/424cc29cbf3e32"
+- id: humanoid-dj
+  title:
+    en: HUMANOID DJ
+    ja: HUMANOID DJ
+  category:
+    en: Creative Engineering
+    ja: クリエイティブエンジニアリング
+  description:
+    en: A real-time performance system that lets a humanoid robot DJ with human-like expressiveness.
+    ja: 人型ロボットが人間らしい表現でDJを行う、リアルタイムパフォーマンスシステム。
+  image: /assets/works/humanoid-dj.png
+  imageAlt:
+    en: Audience watching the HUMANOID DJ performance under vivid projections
+    ja: 鮮やかな映像の下でHUMANOID DJの公演を観る観客
+  url: "https://avex.jp/humanoiddj/"
+- id: python-live-coding
+  title:
+    en: Python Live Coding
+    ja: Python Live Coding
+  category:
+    en: Education / Community
+    ja: 教育 / コミュニティ
+  description:
+    en: Live coding performances and workshops that share the joy of programming and creative engineering.
+    ja: プログラミングとクリエイティブエンジニアリングの楽しさを共有する、ライブコーディング公演とワークショップ。
+  image: /assets/works/python-live-coding.png
+  imageAlt:
+    en: Python Live Coding event poster with the title in large type
+    ja: Python Live Codingのタイトルを大きく配置したイベントポスター
+  url: "https://booth.pm/ja/items/1313912"
+- id: dj-iwashi
+  title:
+    en: DJ IWASHI
+    ja: DJ IWASHI
+  category:
+    en: Creative Technology
+    ja: クリエイティブテクノロジー
+  description:
+    en: An ambitious personal project exploring AI-driven autonomous DJ performances.
+    ja: AIによる自律的なDJパフォーマンスに取り組む野心的な個人プロジェクト
+  image: /assets/works/dj-iwashi.png
+  imageAlt:
+    en: Illustration of a cat DJ wearing headphones at turntables
+    ja: ヘッドホンをつけてターンテーブルを操る猫DJのイラスト
+  url: "https://www.youtube.com/channel/UCkNvky7O7fhjaoLyZWi3z1A"

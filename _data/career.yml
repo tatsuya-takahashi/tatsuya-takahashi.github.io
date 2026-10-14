@@ -1,0 +1,100 @@
+- id: ai-agent
+  years:
+    en: 2025 – Present
+    ja: 2025年 – 現在
+  title:
+    en: Fast Retailing AI Agent Development
+    ja: ファーストリテイリング AIエージェント開発
+  role:
+    en: Forward Deployed Engineer
+    ja: Forward Deployed Engineer
+  description:
+    en: >
+      Worked with supply chain teams to address last-mile operational needs
+      beyond demand forecasting. Built an AI agent on Amazon Bedrock using
+      LangChain and Deep Agents, and improved LLM observability with Datadog.
+    ja: >
+      サプライチェーンの現場担当者と課題を整理し、需要予測だけでは解決できない
+      ラストワンマイルの業務を支援。LangChainとDeep Agentsを用いたAIエージェントを
+      Amazon Bedrock上に構築し、DatadogによるLLMOps監視も改善した。
+- id: demand-forecasting
+  years:
+    en: 2023 – Present
+    ja: 2023年 – 現在
+  title:
+    en: Fast Retailing Demand Forecasting System
+    ja: ファーストリテイリング 需要予測システム
+  role:
+    en: Data Engineer
+    ja: データエンジニア
+  description:
+    en: >
+      Built and operated a system that aggregates global sales data for UNIQLO
+      and GU in real time and generates daily demand forecasts. Developed and
+      operated reliable pipelines with Cloud Composer and BigQuery on GCP.
+    ja: >
+      UNIQLOとGUのグローバルな売上実績をリアルタイムに集計し、日次で
+      需要予測するシステムを構築・運用。GCPのCloud ComposerとBigQueryを使い、
+      安定したデータパイプラインを開発運用している。
+- id: asahi-kasei
+  years:
+    en: 2020 – 2023
+    ja: 2020年 – 2023年
+  title:
+    en: Asahi Kasei Business Improvement Project
+    ja: 旭化成 業務改善プロジェクト
+  role:
+    en: Forward Deployed Engineer / Project Manager
+    ja: Forward Deployed Engineer / プロジェクトマネージャー
+  description:
+    en: >
+      Worked on-site with teams to understand why meeting time remained high
+      after the pandemic. Designed and delivered secure Azure systems for
+      AI-assisted scheduling and meeting analysis, including speech analytics,
+      speaking-rate measurement, real-time transcription, and topic analysis.
+      Led analysis and project delivery, helping reduce meeting time by 30%.
+    ja: >
+      現場に常駐して課題を聞き取り、コロナ禍後も会議時間が減らず本来の業務を
+      圧迫していることを特定。会議調整と会議分析を支援するAIシステムを、
+      セキュアなAzure環境に構築しました。音声信号解析、話速測定、リアルタイム
+      書き起こし、会議トピック分析を行い、分析とプロジェクト推進を担って
+      会議時間を30%削減しました。
+- id: cancer-center
+  years:
+    en: 2016 – 2019
+    ja: 2016年 – 2019年
+  title:
+    en: National Cancer Center Project
+    ja: 国立がん研究センタープロジェクト
+  role:
+    en: Data Scientist & Web Developer
+    ja: データサイエンティスト / Web開発者
+  description:
+    en: >
+      Analyzed 100 million research papers with Apache Spark on Databricks,
+      clustered researchers, and mapped relationships between papers and authors.
+      Built an interactive visualization app with Next.js and D3.js and deployed
+      it in a secure Azure environment.
+    ja: >
+      国立がん研究センターとの共同研究で、Databricks上のApache Sparkを使って
+      約1億件の論文を分析し、研究者をクラスタリングして論文との関連を可視化。
+      Next.jsとD3.jsでインタラクティブなWebアプリを構築し、Azure上の
+      セキュアな環境に導入しました。
+- id: social-insurance
+  years:
+    en: 2010 – 2015
+    ja: 2010年 – 2015年
+  title:
+    en: Social Insurance Data Platform Project
+    ja: 社会保険データ基盤プロジェクト
+  role:
+    en: DBA
+    ja: DBA
+  description:
+    en: >
+      Joined Mizuho Information & Research Institute's social insurance data
+      platform project as a DBA. Improved Oracle database governance and
+      performance through focused tuning.
+    ja: >
+      みずほ情報総研の社会保険データ基盤構築プロジェクトにDBAとして参画。
+      Oracle Databaseのデータガバナンスを整え、パフォーマンスを改善しました。

@@ -1,0 +1,32 @@
+---
+layout: null
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ site.data.profile.summary.en | escape }}">
+    <meta name="theme-color" content="#f7f6f2">
+    <title>{{ site.data.ui.title.en | escape }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@400;500;600;700&amp;family=Oxanium:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
+    <script defer src="{{ '/assets/js/d3.min.js' | relative_url }}"></script>
+    <script defer src="{{ '/assets/js/main.js' | relative_url }}"></script>
+  </head>
+  <body>
+    <div id="portfolio-root"></div>
+    <script id="portfolio-data" type="application/json">
+      {
+        "profile": {{ site.data.profile | jsonify }},
+        "ui": {{ site.data.ui | jsonify }},
+        "links": {{ site.data.links | jsonify }},
+        "works": {{ site.data.works | jsonify }},
+        "career": {{ site.data.career | jsonify }},
+        "skills": {{ site.data.skills | jsonify }}
+      }
+    </script>
+  </body>
+</html>
