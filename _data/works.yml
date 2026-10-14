@@ -26,8 +26,8 @@
     ja: 論文の引用関係を可視化して探索できるツール。研究のつながりを、より直感的に見つけられます。
   image: /assets/works/citation-viewer.png
   imageAlt:
-    en: A citation network displayed in a research tool
-    ja: 研究支援ツールに表示された論文の引用ネットワーク
+    en: Citation Viewer start screen with a citation graph and JSON file button
+    ja: 引用関係のグラフとJSONファイル選択ボタンを表示したCitation Viewerの画面
   url: "https://zenn.dev/iwashi_ser/articles/424cc29cbf3e32"
 - id: humanoid-dj
   title:
