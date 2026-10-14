@@ -625,7 +625,8 @@ a.work-arrow:hover {
 
 .skill-network__group-node {
   display: grid;
-  width: 132px;
+  width: max-content;
+  min-width: 132px;
   min-height: 62px;
   margin: 0;
   padding: 0 1rem;
@@ -639,6 +640,7 @@ a.work-arrow:hover {
   font-size: 1.15rem;
   font-weight: 600;
   line-height: 1;
+  white-space: nowrap;
   cursor: grab;
   touch-action: none;
   user-select: none;
@@ -1018,7 +1020,8 @@ a.work-arrow:hover {
   }
 
   .skill-network__group-node {
-    width: 124px;
+    width: max-content;
+    min-width: 124px;
     min-height: 58px;
     font-size: 1.08rem;
   }
