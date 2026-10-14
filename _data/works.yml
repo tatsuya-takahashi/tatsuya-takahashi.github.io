@@ -8,10 +8,11 @@
   description:
     en: A message platform that connects people through thoughtful letters in the digital age.
     ja: デジタル時代に、手紙を通じて人と人をつなぐメッセージプラットフォーム。
-  image: /assets/works/letter.png
+  image: /assets/works/letter-app-icon.png
+  imageVariant: app-icon
   imageAlt:
-    en: A LETTER card held in a hand
-    ja: 手に持ったLETTERのカード
+    en: The LETTER app icon with a handwritten L in navy ink
+    ja: 藍色のインクでLを描いたLETTERアプリのアイコン
   url:
 - id: citation-viewer
   title:

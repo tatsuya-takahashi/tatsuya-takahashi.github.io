@@ -371,6 +371,13 @@ button {
   object-fit: cover;
 }
 
+.work-image--app-icon {
+  border-radius: 0;
+  background: transparent;
+  object-fit: contain;
+  object-position: left center;
+}
+
 .work-copy {
   min-width: 0;
 }

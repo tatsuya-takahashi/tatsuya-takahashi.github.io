@@ -146,6 +146,8 @@
       .map(function (work) {
         const title = localized(work.title);
         const url = safeURL(work.url);
+        const imageVariant =
+          work.imageVariant === "app-icon" ? " work-image--app-icon" : "";
         const titleMarkup = url
           ? '<a class="work-title-link" href="' +
             escapeHTML(url) +
@@ -178,7 +180,9 @@
 
         return (
           '<article class="work-item">' +
-          '<img class="work-image" src="' +
+          '<img class="work-image' +
+          imageVariant +
+          '" src="' +
           escapeHTML(work.image) +
           '" alt="' +
           escapeHTML(localized(work.imageAlt)) +
