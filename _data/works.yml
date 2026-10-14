@@ -1,0 +1,75 @@
+- id: letter
+  title:
+    en: LETTER
+    ja: LETTER
+  category:
+    en: Web Application
+    ja: Webアプリケーション
+  description:
+    en: A message platform that connects people through thoughtful letters in the digital age.
+    ja: デジタル時代に、手紙を通じて人と人をつなぐメッセージプラットフォーム。
+  image: /assets/works/letter.png
+  imageAlt:
+    en: A LETTER card held in a hand
+    ja: 手に持ったLETTERのカード
+  url:
+- id: citation-viewer
+  title:
+    en: Citation Viewer
+    ja: Citation Viewer
+  category:
+    en: Research Tool
+    ja: 研究支援ツール
+  description:
+    en: A tool for visualizing and exploring academic citations, making research discovery more intuitive and accessible.
+    ja: 論文の引用関係を可視化して探索できるツール。研究のつながりを、より直感的に見つけられます。
+  image: /assets/works/citation-viewer.png
+  imageAlt:
+    en: A citation network displayed in a research tool
+    ja: 研究支援ツールに表示された論文の引用ネットワーク
+  url: "https://zenn.dev/iwashi_ser/articles/424cc29cbf3e32"
+- id: humanoid-dj
+  title:
+    en: HUMANOID DJ
+    ja: HUMANOID DJ
+  category:
+    en: Creative Engineering
+    ja: クリエイティブエンジニアリング
+  description:
+    en: A real-time performance system that lets a humanoid robot DJ with human-like expressiveness.
+    ja: 人型ロボットが人間らしい表現でDJを行う、リアルタイムパフォーマンスシステム。
+  image: /assets/works/humanoid-dj.png
+  imageAlt:
+    en: A humanoid robot performing as a DJ
+    ja: DJパフォーマンスを行うヒューマノイドロボット
+  url: "https://avex.jp/humanoiddj/"
+- id: python-live-coding
+  title:
+    en: Python Live Coding
+    ja: Python Live Coding
+  category:
+    en: Education / Community
+    ja: 教育 / コミュニティ
+  description:
+    en: Live coding performances and workshops that share the joy of programming and creative engineering.
+    ja: プログラミングとクリエイティブエンジニアリングの楽しさを共有する、ライブコーディング公演とワークショップ。
+  image: /assets/works/python-live-coding.png
+  imageAlt:
+    en: A live coding performance on a large screen
+    ja: 大きな画面を使ったライブコーディングの様子
+  url: "https://booth.pm/ja/items/1313912"
+- id: dj-iwashi
+  title:
+    en: DJ IWASHI
+    ja: DJ IWASHI
+  category:
+    en: Creative Technology
+    ja: クリエイティブテクノロジー
+  description:
+    en: An audiovisual performance translating the movement of sardine schools into music and visuals.
+    ja: イワシの群れの動きを音楽と映像に変換する、オーディオビジュアルパフォーマンス。
+  image: /assets/works/dj-iwashi.png
+  imageAlt:
+    en: A school of sardines moving through blue water
+    ja: 青い水中を泳ぐイワシの群れ
+  url: "https://www.youtube.com/channel/UCkNvky7O7fhjaoLyZWi3z1A"

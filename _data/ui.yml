@@ -1,0 +1,37 @@
+defaultLocale: en
+title:
+  en: Tatsuya Takahashi — Senior Engineer
+  ja: 高橋 達哉 — シニアエンジニア
+skipToContent:
+  en: Skip to content
+  ja: コンテンツへ移動
+navigationLabel:
+  en: Main navigation
+  ja: メインナビゲーション
+languageLabel:
+  en: Language
+  ja: 言語
+socialLinksLabel:
+  en: Social links
+  ja: ソーシャルリンク
+works:
+  en: Works
+  ja: 作品
+worksNote:
+  en: Selected work
+  ja: 主な作品
+career:
+  en: Career Timeline
+  ja: 職務経歴
+skills:
+  en: Skills
+  ja: スキル
+rolePrefix:
+  en: "Role:"
+  ja: "役割："
+openProject:
+  en: Open project
+  ja: プロジェクトを開く
+languageChanged:
+  en: Language changed to English
+  ja: 表示言語を日本語に変更しました

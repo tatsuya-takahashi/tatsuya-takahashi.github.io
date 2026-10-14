@@ -1,0 +1,63 @@
+- id: programming
+  icon: code
+  title:
+    en: Programming
+    ja: プログラミング
+  items:
+    - { en: Python, ja: Python }
+    - { en: TypeScript, ja: TypeScript }
+    - { en: JavaScript, ja: JavaScript }
+    - { en: Go, ja: Go }
+    - { en: SQL, ja: SQL }
+- id: data-ai
+  icon: data
+  title:
+    en: Data & AI
+    ja: データ / AI
+  items:
+    - { en: Machine Learning, ja: 機械学習 }
+    - { en: Data Analysis, ja: データ分析 }
+    - { en: LLM, ja: LLM }
+    - { en: Computer Vision, ja: コンピュータビジョン }
+    - { en: Generative AI, ja: 生成AI }
+- id: frameworks-tools
+  icon: layers
+  title:
+    en: Frameworks & Tools
+    ja: フレームワーク / ツール
+  items:
+    - { en: React, ja: React }
+    - { en: Next.js, ja: Next.js }
+    - { en: FastAPI, ja: FastAPI }
+    - { en: PyTorch, ja: PyTorch }
+    - { en: Docker, ja: Docker }
+- id: creative
+  icon: creative
+  title:
+    en: Creative & Other
+    ja: クリエイティブ / その他
+  items:
+    - { en: Max / MSP, ja: Max / MSP }
+    - { en: TouchDesigner, ja: TouchDesigner }
+    - { en: Creative Coding, ja: Creative Coding }
+    - { en: DJ / VJ, ja: DJ / VJ }
+    - { en: 3D Graphics, ja: 3D Graphics }
+- id: cloud
+  icon: cloud
+  title:
+    en: Cloud & Infrastructure
+    ja: クラウド / インフラ
+  items:
+    - { en: AWS, ja: AWS }
+    - { en: GCP, ja: GCP }
+    - { en: Linux, ja: Linux }
+    - { en: Terraform, ja: Terraform }
+    - { en: CI/CD, ja: CI/CD }
+- id: languages
+  icon: language
+  title:
+    en: Languages
+    ja: 言語
+  items:
+    - { en: Japanese (Native), ja: 日本語（ネイティブ） }
+    - { en: English (Professional), ja: 英語（ビジネス） }
