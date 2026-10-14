@@ -387,6 +387,14 @@ button {
   object-position: center 40%;
 }
 
+.work-image.work-image--square {
+  width: clamp(72px, 9vw, 104px);
+  aspect-ratio: 1;
+  background: transparent;
+  object-fit: contain;
+  object-position: left center;
+}
+
 .work-copy {
   min-width: 0;
 }

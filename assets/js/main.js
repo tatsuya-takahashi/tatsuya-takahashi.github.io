@@ -150,6 +150,7 @@
           "app-icon": " work-image--app-icon",
           landscape: " work-image--landscape",
           poster: " work-image--poster",
+          square: " work-image--square",
         };
         const imageVariant = imageVariantClasses[work.imageVariant] || "";
         const titleMarkup = url
