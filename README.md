@@ -21,4 +21,4 @@ All portfolio copy and facts live in YAML:
 
 Edit both en and ja values to keep language switching complete. The career dates are provisional and can be changed in _data/career.yml. The GitHub URL is a placeholder; replace it with the correct profile URL in _data/links.yml.
 
-The cat portrait is assets/profile.png. The LETTER work image is the app icon from the LETTER iOS project, and Citation Viewer uses its supplied screenshot. The other three work thumbnails are cropped from the visual reference. Update image paths in _data/works.yml to replace them.
+The cat portrait is assets/profile.png. The LETTER work image is the app icon from the LETTER iOS project; Citation Viewer and HUMANOID DJ use supplied screenshots. The other two work thumbnails are cropped from the visual reference. Update image paths in _data/works.yml to replace them.

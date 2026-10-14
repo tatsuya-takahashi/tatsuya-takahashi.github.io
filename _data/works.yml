@@ -40,9 +40,10 @@
     en: A real-time performance system that lets a humanoid robot DJ with human-like expressiveness.
     ja: 人型ロボットが人間らしい表現でDJを行う、リアルタイムパフォーマンスシステム。
   image: /assets/works/humanoid-dj.png
+  imageVariant: landscape
   imageAlt:
-    en: A humanoid robot performing as a DJ
-    ja: DJパフォーマンスを行うヒューマノイドロボット
+    en: Audience watching the HUMANOID DJ performance under vivid projections
+    ja: 鮮やかな映像の下でHUMANOID DJの公演を観る観客
   url: "https://avex.jp/humanoiddj/"
 - id: python-live-coding
   title:

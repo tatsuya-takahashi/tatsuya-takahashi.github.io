@@ -378,6 +378,10 @@ button {
   object-position: left center;
 }
 
+.work-image.work-image--landscape {
+  aspect-ratio: 16 / 9;
+}
+
 .work-copy {
   min-width: 0;
 }
